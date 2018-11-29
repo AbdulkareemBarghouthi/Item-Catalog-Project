@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+ 	   </script>
+
+		<script src="//apis.google.com/js/platform.js?onload=start" async defer></script>
+    <style type="text/css">
+      body{
+        background-color: #D2691E;
+      }
+      #signinButton{
+        padding-left: 45%; 
+      }
+      h1{
+        font-family: sans-serif;
+        color:white;
+      }
+      .container{
+      }
+      h3
+      {
+        text-align: center;
+      }
+      h3 a
+      {
+        text-decoration: none;
+        color: white;
+      }
+    </style>
+</head>
+<body>
+<div class="container"> 
+  <h1 style="text-align: center;">Login with google</h1>
+	<div id = "signinButton">
+		<span class="g-signin"
+		data-scope="openid email"
+		data-clientid="862189943057-pvgaud6p25dgmrgga1km71efaure51gb.apps.googleusercontent.com"
+		data-redirecturi="postmessage"
+		data-accesstype="offline"
+		data-cookiepolicy="single_host_origin"
+		data-callback="signInCallback"
+		data-approvalprompt="force">
+		</span>
+	</div>
+  <h3><a href="{{url_for('showCategories')}}">Go back to Categories</a></h3>
+</div>
+<script>
+	function signInCallback(authResult){
+		 if (authResult['code']) {
+    $('#signinButton').attr('style', 'display: none');
+    $.ajax({
+      type: 'POST',
+      url: '/gconnect?state={{STATE}}',
+      processData: false,
+      data: authResult['code'],
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        // Handle or verify the server response if necessary.
+        if (result) {
+          $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+         setTimeout(function() {
+          window.location.href = "/catalog";
+         }, 4000);
+          
+      } else if (authResult['error']) {
+    console.log('There was an error: ' + authResult['error']);
+  } else {
+        $('#result').html('Failed to make a connection :/');
+         }
+      }
+      
+  }); } }
+</script>
+
+</body>
+</html>

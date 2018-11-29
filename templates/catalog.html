@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome!</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+<div class="card">
+	<div class = "items">
+		<header><h1>Welcome to The BathHub</h1></header>
+		<section><p>Bath hub aims to help you manage and store your entertainment sources. whether it's a book or a PC game bath hub lets you store your media in one place so you could remember them. You know that one annoying friend that suggests shows or games, well bath hub will help you store their suggestion so you could remmember them later.</p></section>
+	</div>
+		{%for item in items%}
+		<div class="contentGrid">
+			<h1><a href="{{url_for('showCategoryItems', category = item.id ,items = item.id)}}">{{item.name}}</a></h1>
+			<h3>{{item.description}}</h3>
+		</div>
+		{%endfor%}
+		<div class="navigation">
+			{%if 'username' not in login_session%}
+			<h3 class ="login"><a href="{{url_for('showLogin')}}">Login</a></h3>
+			{%else%}
+			<h3 class = "logout"><a href="{{url_for('logOut')}}">Sign out</a></h3>
+			{%endif%}
+		</div>
+</div>
+</body>
+</html>

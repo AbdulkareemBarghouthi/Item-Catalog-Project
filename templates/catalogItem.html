@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Category items</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+<div class="panel">
+	<header><h1>{{mainItems.name}}</h1></header>
+	<div class = "items">
+		{%for item in items%}
+		<h1><a href="{{url_for('showContent', category = item.id, content_id = item.id, items = item.id)}}">{{item.name}}</a></h1>
+		{%endfor%}
+		<br>
+		<h3><a href="{{url_for('showCategories')}}">Go back to categories</a></h3>
+	</div>
+</div>
+</body>
+</html>

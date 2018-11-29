@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Adding Content</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='edaStyles.css')}}">
+</head>
+<body>
+<div class="site">
+	<div class="card">
+		<header><h1>Adding your item</h1></header>
+		<div class="content">
+			<form enctype= "multipart/form-data" action="{{url_for('addContentItem', category = category, content_id = content_id)}}" method="post">
+				<label>Name: </label>
+				<input type="text" name="contentName"><br><br>
+				<label>Description: </label>
+				<textarea id="addDesc" name="contentDescription"></textarea><br><br>
+				<input type="file" name="file" accept="image/*" multiple><br><br>
+				<input type="submit" value="Create">
+			</form>
+			<h3><a href="{{url_for('showContent', category = category, content_id = content_id)}}">Go back</a></h3>
+		</div>
+	</div>
+</div>
+</body>
+</html>

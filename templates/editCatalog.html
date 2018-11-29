@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Editing Content</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='edaStyles.css')}}">
+</head>
+<body>
+<div class="site">
+	<div class = "card">
+		<h1 class="editItem"> {{editItem.name}}</h1>
+		<div class = "items">
+			<form action="{{url_for('editContentItem', category = category, content_id = content_id, some_id = some_id)}}" method = "post">
+				<label>Name: </label>
+				<input type="text" name="name"><br>
+				<label>Description: </label>
+				<input id="descriptionEdit" type="text" name="desc">
+				<input type="submit" value="Edit">
+		</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

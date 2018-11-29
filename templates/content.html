@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Content</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+</head>
+<body>
+	<div class = "panel">
+		<div class = "Items">
+		{%with messages = get_flashed_messages() %}
+		{%if messages%}
+		{%for message in messages%}
+		<h3 style="color:brown; text-align:center;">{{ message }}</h3>
+		{%endfor%}
+		{%endif%}
+		{%endwith%}
+			<header><h1>{{parentItems.name}}</h1></header>
+			{%for item in content%}
+			<h1> {{item.name}}</h1>
+			<h3> {{item.description}} </h3>
+			<a href="{{url_for('editContentItem', category = category, content_id = content_id, some_id = item.id)}}">Edit</a>
+			<a href="{{url_for('deleteContentItem', category = category, content_id = content_id, item_id = item.id)}}">Delete</a>
+			{%endfor%}
+		
+			{%for item in userContent%}
+			<h1> {{item.name}}</h1>
+			<h3> {{item.description}} </h3>
+			<a href="{{url_for('editContentItem', category = category, content_id = content_id, some_id = item.id)}}">Edit</a>
+			<a href="{{url_for('deleteContentItem', category = category, content_id = content_id, item_id = item.id)}}">Delete</a>
+			{%endfor%}
+		</div>
+		<div class = "navigation">
+			<h3><a href = "{{url_for('addContentItem', category = category, content_id = content_id)}}">Add</a></h3>
+			<h3><a href = "{{url_for('showCategories')}}">Go back to categories</a></h3>
+		</div>
+	</div>
+</body>
+</html>
